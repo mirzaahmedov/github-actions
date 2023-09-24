@@ -8,7 +8,7 @@ jobs:
 
     services:
       go:
-        image: go
+        image: golang
       postgres:
         image: postgres
 
