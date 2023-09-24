@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 
 	_ "github.com/lib/pq"
 )
@@ -15,14 +16,14 @@ func getDataFromDatabase() (*User, error) {
 
 	db, err := sql.Open("postgres", "postgres://test:test@localhost:5432/test")
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Error connecting database, %v", err)
 	}
 
 	err = db.QueryRow(
 		"SELECT first_name FROM users WHERE first_name='test'",
 	).Scan(&user.FirstName)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Cannot get from database, %v", err)
 	}
 
 	return user, nil
