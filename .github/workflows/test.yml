@@ -31,7 +31,7 @@ jobs:
         run: go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
 
       - name: migrate database
-        run: PATH=$PATH:$HOME/go/bin make migration_up
+        run: cd .. && PATH=$PATH:$HOME/go/bin make migration_up
 
       - name: running tests
         run: go test ./...
