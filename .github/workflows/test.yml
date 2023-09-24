@@ -26,10 +26,10 @@ jobs:
     steps:
       # run steps required in the workflow
       - uses: actions/checkout@v4
-      - name: Setup Go ${{ matrix.go-version }}
+      - name: Setup Go 1.21.x
         uses: actions/setup-go@v4
         with:
-          go-version: ${{ matrix.go-version }}
+          go-version: 1.21.x
       # You can test your matrix by printing the current Go version
       - name: Display Go version
         run: go version
