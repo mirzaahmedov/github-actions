@@ -40,6 +40,9 @@ jobs:
       - name: install dependencies
         run: go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
 
+      - name: Go mod tidy
+        run: go mod tidy
+
       - name: migrate database
         run: PATH=$PATH:$HOME/go/bin make migration_up
 
