@@ -1,0 +1,38 @@
+name: running tests
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres
+
+        env:
+          POSTGRES_PASSWORD: test
+          POSTGRES_USER: test
+          POSTGRES_DB: test
+
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      # run steps required in the workflow
+      - name: install dependencies
+        run: apt install go && go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+
+      - name: migrate database
+        run: migrate -path migrations -database "postgres://test:test@localhost:5432/test" -verbose up -all
+
+      - name: running tests
+        run: go test ./...
+
+      - name: migrate down
+        run: migrate -path migrations -database "postgres://test:test@localhost:5432/test" -verbose down -all
