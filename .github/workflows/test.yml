@@ -7,6 +7,8 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
+      go:
+        image: go
       postgres:
         image: postgres
 
@@ -26,7 +28,7 @@ jobs:
     steps:
       # run steps required in the workflow
       - name: install dependencies
-        run: sudo apt install go && go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+        run: go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
 
       - name: migrate database
         run: migrate -path migrations -database "postgres://test:test@localhost:5432/test" -verbose up -all
