@@ -27,6 +27,9 @@ jobs:
 
     steps:
       # run steps required in the workflow
+      - name: checkout repo
+        uses: actions/checkout@master
+
       - name: install dependencies
         run: go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
 
