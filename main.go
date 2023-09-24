@@ -14,7 +14,7 @@ type User struct {
 func getDataFromDatabase() (*User, error) {
 	user := &User{}
 
-	db, err := sql.Open("postgres", "postgres://test:test@localhost:5432/test")
+	db, err := sql.Open("postgres", "postgres://test:test@localhost:5432/test?sslmode=disable")
 	if err != nil {
 		return nil, fmt.Errorf("Error connecting database, %v", err)
 	}
