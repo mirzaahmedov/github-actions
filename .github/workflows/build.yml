@@ -4,5 +4,4 @@ jobs:
   build:
     name: This is a test build
     steps:
-      - run: |
-        echo This is demo
+      - run: echo This is demo
