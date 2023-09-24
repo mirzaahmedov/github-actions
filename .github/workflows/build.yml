@@ -3,5 +3,6 @@ on: [push]
 jobs:
   build:
     name: This is a test build
+    runs-on: ubuntu-latest
     steps:
       - run: echo This is demo
